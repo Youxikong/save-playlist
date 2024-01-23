@@ -5,6 +5,8 @@ Disclaimer: This is not my script. I took it from a [Reddit thread](https://old.
 
 Thanks to [@Goroto](https://github.com/garoto) (the deleted one) and [@jonniek](https://github.com/jonniek) (his muse) for the script! All credits go to both of them. Without their help, this wouldn't have existed. Thank you again!
 
+Now it support [mpv-menu-dll](https://github.com/tsl0922/mpv-menu-plugin)
+
 # Installation
 Place this script inside your `/scripts` folder.
 
