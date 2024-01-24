@@ -1,4 +1,4 @@
---local playlist_savepath = (os.getenv('APPDATA') or os.getenv('HOME')..'/.config')..'/mpv/'
+-- local playlist_savepath = (os.getenv('APPDATA') or os.getenv('HOME')..'/.config')..'/mpv/'
 local playlist_savepath = mp.get_property('working-directory')
 
 local utils = require("mp.utils")
@@ -30,12 +30,9 @@ function save_playlist(savepath)
 	end
 end
 
--- detect menu.dll and register script message
+-- detect menu.dll
 mp.register_script_message('menu-ready', function()
 	have_menu = true
-	mp.register_script_message('dialog-save-reply', function(savepath)
-		save_playlist(savepath)
-	end)
 end)
 
 mp.register_script_message('save-playlist', function()
@@ -48,6 +45,11 @@ mp.register_script_message('save-playlist', function()
 	local filename = os.time() .. "-size_" .. length .. "-playlist"
 
 	if have_menu then
+		mp.register_script_message('dialog-save-reply', function (savepath)
+			save_playlist(savepath)
+			mp.unregister_script_message('dialog-save-reply')
+		end)
+
 		mp.set_property_native('user-data/menu/dialog/filters', {
 			{ name = 'Playlist Files',  spec = '*.m3u;*.m3u8;*.pls;*.cue' },
 			{ name = 'All Files (*.*)', spec = '*.*' },
