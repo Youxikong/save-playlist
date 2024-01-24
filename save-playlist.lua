@@ -54,6 +54,7 @@ mp.register_script_message('save-playlist', function()
 			{ name = 'Playlist Files',  spec = '*.m3u;*.m3u8;*.pls;*.cue' },
 			{ name = 'All Files (*.*)', spec = '*.*' },
 		})
+		mp.set_property_native('user-data/menu/dialog/default-path', mp.get_property('working-directory'))
 		mp.set_property_native('user-data/menu/dialog/default-name', filename)
 		mp.commandv('script-message-to', 'menu', 'dialog/save', mp.get_script_name())
 	else
